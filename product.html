@@ -16,17 +16,17 @@
     }
   </style>
 </head>
-<body class="bg-rose-50 font-sans text-gray-700">
+<body class="bg-sky-50 font-sans text-gray-700">
 
   <!-- Navbar -->
-<nav class="bg-white shadow px-4 py-3 flex justify-between items-center sticky top-0 z-50">
-  <div class="font-bold text-xl text-blue-600">Online Shop KUDUY</div>
+  <nav class="bg-white shadow px-4 py-3 flex justify-between items-center sticky top-0 z-50">
+    <div class="font-bold text-xl text-sky-600">Online Shop KUDUY</div>
     <div class="space-x-4">
-      <a href="index.html" class="hover:text-rose-500">Beranda</a>
-      <a href="produk.html" class="text-rose-600 font-semibold">Produk</a>
-      <a href="tentang.html" class="hover:text-rose-500">Tentang</a>
+      <a href="index.html" class="hover:text-sky-500">Beranda</a>
+      <a href="produk.html" class="text-sky-600 font-semibold">Produk</a>
+      <a href="tentang.html" class="hover:text-sky-500">Tentang</a>
     </div>
-    <button id="toggleCart" class="bg-rose-500 hover:bg-rose-600 text-white px-3 py-1 rounded-full text-sm">
+    <button id="toggleCart" class="bg-sky-500 hover:bg-sky-600 text-white px-3 py-1 rounded-full text-sm">
       Keranjang 🛒
     </button>
   </nav>
@@ -41,19 +41,18 @@
 
     <!-- Sidebar Keranjang -->
     <aside id="keranjangSidebar" class="hidden lg:block w-full lg:w-1/4 bg-white shadow rounded-xl p-4 h-fit sticky top-24">
-      <h2 class="text-lg font-bold mb-4 text-rose-600">Keranjang</h2>
+      <h2 class="text-lg font-bold mb-4 text-sky-600">Keranjang</h2>
       <div id="keranjangItems" class="space-y-3"></div>
-      <p id="keranjangTotal" class="mt-4 font-semibold text-rose-700"></p>
+      <p id="keranjangTotal" class="mt-4 font-semibold text-sky-700"></p>
       <a id="checkoutBtn" target="_blank"
         class="block mt-4 bg-green-500 hover:bg-green-600 text-white text-center py-2 px-4 rounded-full font-semibold">
         Checkout via WhatsApp
       </a>
     </aside>
-
   </div>
 
   <!-- Toast -->
-  <div id="toast" class="fixed bottom-5 left-1/2 transform -translate-x-1/2 bg-rose-500 text-white px-6 py-2 rounded-full hidden z-50"></div>
+  <div id="toast" class="fixed bottom-5 left-1/2 transform -translate-x-1/2 bg-sky-500 text-white px-6 py-2 rounded-full hidden z-50"></div>
 
   <script>
     const API_URL = "https://crud-api-production-1baf.up.railway.app/api/products";
@@ -114,11 +113,11 @@
         produkList.innerHTML = data.map(p => `
           <div class="bg-white rounded-xl shadow hover:shadow-lg p-4 transition">
             <img src="${p.gambar}" alt="${p.nama_produk}" class="w-full h-40 object-cover rounded-lg mb-2 border" />
-            <h3 class="font-semibold text-lg text-rose-700">${p.nama_produk}</h3>
+            <h3 class="font-semibold text-lg text-sky-700">${p.nama_produk}</h3>
             <p class="text-sm text-gray-500 mb-1">${p.detail}</p>
-            <p class="font-bold text-rose-600 mb-3">Rp${p.harga.toLocaleString("id-ID")}</p>
+            <p class="font-bold text-sky-600 mb-3">Rp${p.harga.toLocaleString("id-ID")}</p>
             <button onclick='tambahKeKeranjang(${JSON.stringify(p)})'
-              class="w-full bg-rose-500 hover:bg-rose-600 text-white py-2 px-4 rounded-full text-sm font-semibold">
+              class="w-full bg-sky-500 hover:bg-sky-600 text-white py-2 px-4 rounded-full text-sm font-semibold">
               Tambah ke Keranjang
             </button>
           </div>
@@ -129,9 +128,7 @@
       }
     }
 
-    document.addEventListener("DOMContentLoaded", () => {
-      loadProduk();
-    });
+    document.addEventListener("DOMContentLoaded", loadProduk);
   </script>
 
 </body>
