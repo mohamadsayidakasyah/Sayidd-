@@ -1,34 +1,77 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Beranda - Zeid Chicken</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Online Shop KUDUY</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-orange-100 text-gray-800 font-sans">
+<body class="bg-gray-50 text-gray-800">
 
-  <header class="bg-orange-500 text-white p-4 shadow">
-    <div class="container mx-auto flex justify-between items-center">
-      <h1 class="text-2xl font-bold">Zeid Chicken</h1>
-      <nav class="space-x-4">
-        <a href="index.html" class="hover:underline">Beranda</a>
-        <a href="product.html" class="hover:underline">Produk</a>
-        <a href="tentang.html" class="hover:underline">Tentang</a>
-      </nav>
+  <!-- Navbar -->
+  <nav class="bg-white shadow sticky top-0 z-10">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+      <h1 class="text-xl font-bold text-rose-600">Online Shop Lee</h1>
+      <div class="space-x-6 text-sm font-medium">
+        <a href="index.html" class="text-gray-700 hover:text-rose-600">Beranda</a>
+        <a href="produk.html" class="text-gray-700 hover:text-rose-600">Produk</a>
+        <a href="tentang.html" class="text-gray-700 hover:text-rose-600">Tentang</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="bg-rose-100 py-16">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-3xl font-bold text-rose-700 mb-4">Selamat Datang di Online Shop KUDUY</h2>
+      <p class="text-gray-600">Temukan produk perawatan terbaik untuk kulitmu dengan harga terjangkau!</p>
     </div>
   </header>
 
-  <main class="container mx-auto p-8 text-center">
-    <h2 class="text-3xl font-bold mb-4">Ayam Geprek Spesial</h2>
-    <p class="mb-6">Rasakan kelezatan ayam geprek pedas dengan sambal pilihan!</p>
-    <a href="product.html" class="bg-orange-600 text-white px-6 py-2 rounded hover:bg-orange-700">Lihat Produk</a>
-  </main>
+  <!-- Produk Unggulan (Horizontal Scroll) -->
+  <section class="py-12 bg-white">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-2xl font-bold mb-4 text-rose-600">Produk Unggulan</h2>
+      <div id="produkScroll" class="flex gap-4 overflow-x-auto pb-2">
+        <!-- Produk dimuat oleh JS -->
+      </div>
+    </div>
+  </section>
 
-  <footer class="bg-orange-500 text-white text-center py-4 mt-10">
-    &copy; 2025 Zeid Chicken
+  <!-- Footer -->
+  <footer class="bg-white border-t mt-10 py-6 text-center text-sm text-gray-500">
+    &copy; 2025 Online Shop KUDUY. All rights reserved.
   </footer>
 
-  <script src="https://rifkira.psl17.my.id/js/app.js"></script>
+  <script>
+    const API_URL = "https://crud-api-production-1baf.up.railway.app/api/products";
+
+    async function loadProdukBeranda() {
+      const container = document.getElementById('produkScroll');
+      if (!container) return;
+
+      try {
+        const res = await fetch(API_URL);
+        const data = await res.json();
+        const produk = data.slice(0, 10); // tampilkan maksimal 10
+
+        container.innerHTML = produk.map(p => `
+          <div class="min-w-[200px] bg-white border rounded-xl shadow hover:shadow-lg transition">
+            <img src="${p.gambar}" alt="${p.nama_produk}" class="h-40 w-full object-cover rounded-t-xl">
+            <div class="p-3">
+              <h3 class="text-sm font-semibold text-gray-700">${p.nama_produk}</h3>
+              <p class="text-xs text-gray-500">${p.kategori}</p>
+              <p class="text-sm font-bold text-rose-600 mt-1">Rp${p.harga.toLocaleString('id-ID')}</p>
+            </div>
+          </div>
+        `).join('');
+      } catch (err) {
+        container.innerHTML = '<p class="text-red-500">Gagal memuat produk.</p>';
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadProdukBeranda);
+  </script>
+
 </body>
 </html>
